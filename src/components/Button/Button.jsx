@@ -15,9 +15,9 @@ const BUTTON = styled.button`
   }
 `;
 
-const Button = ({ children, type, onClick, margin }) => {
+const Button = ({ children, type, onClick, margin, name}) => {
   return (
-      <BUTTON onClick={onClick} type={type} margin={"0 7px 20px"}>{children}</BUTTON>
+      <BUTTON onClick={onClick} type={type} margin={margin} name={name}>{children}</BUTTON>
   )
 }
 

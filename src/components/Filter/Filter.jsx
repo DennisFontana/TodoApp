@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
+import {
+	changeFilterValue,
+	changeFilterStatus,
+} from "../../store/todo/todo.actions";
+import { useDispatch, useSelector } from "react-redux";
 
-const Filter = ({ onChangeFilterValue, filterValue, onChangeFilterStatus }) => {
+const Filter = () => {
+	const { filterValue } = useSelector((state) => state.todos);
+	const dispatch = useDispatch();
+
 	const handleChangeValue = (e) => {
-		onChangeFilterValue(e.target.value);
+		dispatch(changeFilterValue(e.target.value));
 	};
-  const handleChangeFilterStatus = (e) => {
-    onChangeFilterStatus(e.target.textContent)
-    // console.log(e.target.textContent);
-  }
-  
+
+	const handleChangeFilterStatus = (e) => {
+		dispatch(changeFilterStatus(e.target.name));
+	};
+
 	return (
 		<section>
 			<form>
@@ -22,11 +30,28 @@ const Filter = ({ onChangeFilterValue, filterValue, onChangeFilterStatus }) => {
 					value={filterValue}
 				/>
 				<div>
-					<Button primary type="button" onClick={handleChangeFilterStatus} >
+					<Button
+						primary
+						type="button"
+						onClick={handleChangeFilterStatus}
+						name="Все"
+					>
 						Все
 					</Button>
-					<Button type="button"onClick={handleChangeFilterStatus} >Выполненные</Button>
-					<Button type="button"onClick={handleChangeFilterStatus} >Удалённые</Button>
+					<Button
+						type="button"
+						onClick={handleChangeFilterStatus}
+						name="Выполненные"
+					>
+						Выполненные
+					</Button>
+					<Button
+						type="button"
+						onClick={handleChangeFilterStatus}
+						name="Удалённые"
+					>
+						Удалённые
+					</Button>
 				</div>
 			</form>
 		</section>
